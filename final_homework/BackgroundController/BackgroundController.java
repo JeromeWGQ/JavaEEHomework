@@ -2,27 +2,20 @@ package cn.edu.bjtu.weibo.controller;
 
 import cn.edu.bjtu.weibo.service.UserManageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 后台管理页面的Controller
  *
  * @author 王国桥
  */
-@Controller
+@RestController
+@RequestMapping("/b")
 public class BackgroundController {
-    private UserManageService userManageService;
-
-    /**
-     * 构造器，自动注入需要的Service
-     *
-     * @param userManageService 要注入的loginService
-     */
     @Autowired
-    public BackgroundController(UserManageService userManageService) {
-        this.userManageService = userManageService;
-    }
+    private UserManageService userManageService;
 
     /**
      * 通过userId封禁用户
@@ -34,7 +27,7 @@ public class BackgroundController {
      * ["value"]
      * 其中value：1 - 封禁成功；2 - 封禁失败
      */
-    @RequestMapping("/banUserById")
+    @RequestMapping(value = "/banUserById", method = RequestMethod.GET)
     public String banUserById(String userId) {
         if (userManageService.banUser(userId)) {
             return "[\"1\"]";
@@ -53,7 +46,7 @@ public class BackgroundController {
      * ["value"]
      * 其中value：1 - 封禁成功；2 - 封禁失败
      */
-    @RequestMapping("/unBanUserById")
+    @RequestMapping(value = "/unBanUserById", method = RequestMethod.GET)
     public String unBanUserById(String userId) {
         if (userManageService.unBanUser(userId)) {
             return "[\"1\"]";
@@ -72,7 +65,7 @@ public class BackgroundController {
      * ["value"]
      * 其中value：1 - 封禁成功；2 - 封禁失败
      */
-    @RequestMapping("/banUserByName")
+    @RequestMapping(value = "/banUserByName", method = RequestMethod.GET)
     public String banUserByName(String userName) {
         if (userManageService.banUser(userName)) {
             return "[\"1\"]";
@@ -91,7 +84,7 @@ public class BackgroundController {
      * ["value"]
      * 其中value：1 - 封禁成功；2 - 封禁失败
      */
-    @RequestMapping("/unBanUserByName")
+    @RequestMapping(value = "/unBanUserByName", method = RequestMethod.GET)
     public String unBanUserByName(String userName) {
         if (userManageService.unBanUser(userName)) {
             return "[\"1\"]";
